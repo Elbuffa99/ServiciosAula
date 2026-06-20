@@ -21,7 +21,6 @@ public class ReservaDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaReserva;
 
-    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaSolicitud;
 
