@@ -55,4 +55,11 @@ public class UsuarioServiceImpl extends CRUDImpl<Usuario, Integer> implements IU
         return repo.findAllConRelaciones();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Usuario readByid(Integer id) throws Exception {
+        return repo.findByIdConRelaciones(id)
+                .orElseThrow(() -> new ModelNotFoundException("Usuario no encontrado: " + id));
+    }
+
 }

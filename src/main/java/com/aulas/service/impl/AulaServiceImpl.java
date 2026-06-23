@@ -14,6 +14,9 @@ import com.aulas.util.MapperUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.aulas.exception.ModelNotFoundException;
+
+
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -93,4 +96,18 @@ public class AulaServiceImpl extends CRUDImpl<Aula, Integer> implements IAulaSer
                 .llena(disponible <= 0)
                 .build();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Aula> readAll() throws Exception {
+        return repo.findAllConRelaciones();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Aula readByid(Integer id) throws Exception {
+        return repo.findByIdConRelaciones(id)
+                .orElseThrow(() -> new ModelNotFoundException("Aula no encontrada: " + id));
+    }
+
 }

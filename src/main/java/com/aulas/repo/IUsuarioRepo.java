@@ -2,6 +2,7 @@ package com.aulas.repo;
 
 import com.aulas.model.Usuario;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,5 +23,12 @@ public interface IUsuarioRepo extends IGenericRepo<Usuario, Integer> {
             "LEFT JOIN FETCH u.sede " +
             "LEFT JOIN FETCH u.carrera")
     List<Usuario> findAllConRelaciones();
+
+    @Query("SELECT u FROM Usuario u " +
+            "LEFT JOIN FETCH u.rol " +
+            "LEFT JOIN FETCH u.sede " +
+            "LEFT JOIN FETCH u.carrera " +
+            "WHERE u.idUsuario = :id")
+    Optional<Usuario> findByIdConRelaciones(@Param("id") Integer id);
 
 }

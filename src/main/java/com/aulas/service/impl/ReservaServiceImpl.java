@@ -244,4 +244,17 @@ public class ReservaServiceImpl extends CRUDImpl<Reserva, Integer> implements IR
         }
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Reserva> readAll() throws Exception {
+        return repo.findAllConRelaciones();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Reserva readByid(Integer id) throws Exception {
+        return repo.findByIdConRelaciones(id)
+                .orElseThrow(() -> new ModelNotFoundException("Reserva no encontrada: " + id));
+    }
+
 }

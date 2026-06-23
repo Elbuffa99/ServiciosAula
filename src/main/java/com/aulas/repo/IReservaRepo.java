@@ -1,6 +1,7 @@
 package com.aulas.repo;
 import com.aulas.model.Reserva;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,5 +33,28 @@ public interface IReservaRepo extends IGenericRepo<Reserva, Integer> {
     // ¿Cuántas reservas activas tiene el usuario ese día? (regla 4)
     @Query("SELECT COUNT(r) FROM Reserva r " + "WHERE r.usuario.idUsuario = :idUsuario " + "AND r.fechaReserva = :fecha " + "AND r.estadoReserva.descripcion NOT IN ('CANCELADA', 'RECHAZADA')")
     Long contarReservasUsuarioEnFecha(Integer idUsuario, LocalDate fecha);
+
+    @Query("SELECT r FROM Reserva r " +
+            "LEFT JOIN FETCH r.usuario u " +
+            "LEFT JOIN FETCH u.rol " +
+            "LEFT JOIN FETCH r.aula a " +
+            "LEFT JOIN FETCH a.tipoAula " +
+            "LEFT JOIN FETCH r.sede " +
+            "LEFT JOIN FETCH r.horario " +
+            "LEFT JOIN FETCH r.estadoReserva " +
+            "LEFT JOIN FETCH r.tipoReserva")
+    List<Reserva> findAllConRelaciones();
+
+    @Query("SELECT r FROM Reserva r " +
+            "LEFT JOIN FETCH r.usuario u " +
+            "LEFT JOIN FETCH u.rol " +
+            "LEFT JOIN FETCH r.aula a " +
+            "LEFT JOIN FETCH a.tipoAula " +
+            "LEFT JOIN FETCH r.sede " +
+            "LEFT JOIN FETCH r.horario " +
+            "LEFT JOIN FETCH r.estadoReserva " +
+            "LEFT JOIN FETCH r.tipoReserva " +
+            "WHERE r.idReserva = :id")
+    Optional<Reserva> findByIdConRelaciones(@Param("id") Integer id);
 
 }
