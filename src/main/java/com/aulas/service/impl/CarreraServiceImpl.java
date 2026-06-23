@@ -22,7 +22,7 @@ public class CarreraServiceImpl extends CRUDImpl<Carrera, Integer> implements IC
         return repo;
     }
 
-    @Override
+  /*  @Override
     @Transactional(readOnly = true)
     public List<Carrera> readAll() throws Exception {
         return repo.findAllConRelaciones();
@@ -33,6 +33,6 @@ public class CarreraServiceImpl extends CRUDImpl<Carrera, Integer> implements IC
     public Carrera readByid(Integer id) throws Exception {
         return repo.findByIdConRelaciones(id)
                 .orElseThrow(() -> new ModelNotFoundException("Carrera no encontrada: " + id));
-    }
+    } */
 
 }

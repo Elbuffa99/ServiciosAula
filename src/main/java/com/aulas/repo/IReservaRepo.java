@@ -37,7 +37,10 @@ public interface IReservaRepo extends IGenericRepo<Reserva, Integer> {
     @Query("SELECT r FROM Reserva r " +
             "LEFT JOIN FETCH r.usuario u " +
             "LEFT JOIN FETCH u.rol " +
+            "LEFT JOIN FETCH u.sede " +
+            "LEFT JOIN FETCH u.carrera " +
             "LEFT JOIN FETCH r.aula a " +
+            "LEFT JOIN FETCH a.sede " +
             "LEFT JOIN FETCH a.tipoAula " +
             "LEFT JOIN FETCH r.sede " +
             "LEFT JOIN FETCH r.horario " +
@@ -48,7 +51,10 @@ public interface IReservaRepo extends IGenericRepo<Reserva, Integer> {
     @Query("SELECT r FROM Reserva r " +
             "LEFT JOIN FETCH r.usuario u " +
             "LEFT JOIN FETCH u.rol " +
+            "LEFT JOIN FETCH u.sede " +
+            "LEFT JOIN FETCH u.carrera " +
             "LEFT JOIN FETCH r.aula a " +
+            "LEFT JOIN FETCH a.sede " +
             "LEFT JOIN FETCH a.tipoAula " +
             "LEFT JOIN FETCH r.sede " +
             "LEFT JOIN FETCH r.horario " +

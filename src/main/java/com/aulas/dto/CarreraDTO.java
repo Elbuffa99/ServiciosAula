@@ -20,6 +20,6 @@ public class CarreraDTO {
     @Size(min = 3, max = 200)
     private String nombreCarrera;
 
-    @JsonIncludeProperties(value = {"idTipoAula"})
-    private Set<TipoAulaDTO> tiposAula;
+    //@JsonIncludeProperties(value = {"idTipoAula"})
+    //private Set<TipoAulaDTO> tiposAula;
 }
