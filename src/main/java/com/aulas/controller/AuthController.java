@@ -32,7 +32,7 @@ public class AuthController {
     // ===== LOGIN =====
     @PostMapping("/login")
     public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO dto) throws Exception {
-        // Solo atrapamos errores de auth, no genéricos
+
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                             dto.getCorreoInstitucional(),
@@ -55,7 +55,7 @@ public class AuthController {
                 .correoInstitucional(usuario.getCorreoInstitucional())
                 .nombreUsuario(usuario.getNombreUsuario())
                 .apellidoUsuario(usuario.getApellidoUsuario())
-                .rol(usuario.getRol().getNombreRol())   // ← OJO: aquí también accedes al Rol
+                .rol(usuario.getRol().getNombreRol())
                 .build();
     }
 
